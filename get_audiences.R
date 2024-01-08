@@ -81,12 +81,12 @@ thedat <- read_csv("data/wtm_advertisers.csv")
 
 if(sets$cntry %in% country_codes & nrow(thedat)!=0){
   
-wtm_data <- read_csv("data/wtm_advertisers.csv") %>% #names
-  select(page_id = advertisers_platforms.advertiser_platform_ref,
-         page_name = name, party = entities.short_name)  %>%
-  mutate(page_id = as.character(page_id)) %>% 
-  mutate(sources = "wtm")
-
+  wtm_data <- read_csv("data/wtm_advertisers.csv") %>% #names
+    select(page_id = advertisers_platforms.advertiser_platform_ref,
+           page_name = name, party = entities.short_name)  %>%
+    mutate(page_id = as.character(page_id)) %>% 
+    mutate(sources = "wtm")
+  
 } else {
   wtm_data <-  tibble(no_data = T)
 }
@@ -145,7 +145,7 @@ try({
   
   download.file(paste0("https://github.com/favstats/meta_ad_reports/releases/download/", sets$cntry,"-last_90_days/", latest$file_name), 
                 destfile = "report.rds"
-                )
+  )
   
   last7 <- readRDS("report.rds")%>% 
     mutate(sources = "report") %>% 
@@ -203,7 +203,7 @@ scraper <- function(.x, time = tf) {
     saveRDS(fin, file = path)
     # }
   } else {
-   fin <- tibble(internal_id = .x$page_id, no_data = T) %>%
+    fin <- tibble(internal_id = .x$page_id, no_data = T) %>%
       mutate(tstamp = tstamp)
   }
   
@@ -252,8 +252,8 @@ if(new_ds == latest_ds){
     saveRDS(election_dat, file = paste0(current_date, ".rds"))
   }
   
-
-  } else {
+  
+} else {
   
   ### save seperately
   election_dat <- all_dat %>% 
@@ -355,7 +355,7 @@ if("ds" %in% names(election_dat) ){
     }
     
   })
-
+  
 }
 
 # sources("start.R")
