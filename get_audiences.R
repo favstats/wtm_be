@@ -1,6 +1,8 @@
 # Get command-line arguments
 tf <- commandArgs(trailingOnly = TRUE)
 
+here::i_am("wtm_tw.Rproj")
+
 # setwd("template")
 # getwd()
 source("utils.R")
@@ -21,7 +23,7 @@ write_lines(title_txt, "_site/_quarto.yml")
 
 if(Sys.info()[["sysname"]]=="Windows"){
   ### CHANGE ME WHEN LOCAL!
-  tf <- "90"
+  tf <- "30"
   print(paste0("TF: ", tf))
 }
 
@@ -180,6 +182,8 @@ all_dat <- #read_csv("nl_advertisers.csv") %>%
 # all_dat %>% filter(str_detect(page_name, "GroenLinks-PvdA"))
 
 saveRDS(all_dat, "data/all_dat.rds")
+
+source("cntry.R")
 
 # all_dat %>% filter(page_id == "492150400807824")
 
